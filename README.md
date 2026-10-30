@@ -2,7 +2,7 @@
 
 A single-page dashboard that profiles which spatial outputs each consultant on a project produces, which specifications they set and which GIS products they depend on, and checks their timing against the GIS deliverables.
 
-**Live page:** https://joshuaturia.github.io/bgi-spatial-profile/
+**Live page:** https://joshuaturia.github.io/bgo-spatial-profile/
 
 The page is public. The data is not:
 
