@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Consultant spatial profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: chart-room working sheet — header strip of contract dates, tabbed views, dense tables in scroll wells */
+:root{
+  --bg:#F2F5F5; --surface:#FFFFFF; --sunk:#E8EEEF; --ink:#13242A; --muted:#56686D; --line:#D3DCDE; --accent:#0B6B75;
+  --cF:#2B66AD; --cN:#357F47; --cM:#AE4F28; --cC:#74499B; --cB:#9A740C; --cG:#13242A;
+  --ok:#2E7D4F; --okbg:#E1F1E7; --late:#A86A00; --latebg:#FBEFD6; --after:#B53A27; --afterbg:#F8E0DB;
+  --display:"Archivo",system-ui,sans-serif; --body:"Atkinson Hyperlegible",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0D1619; --surface:#142126; --sunk:#0F1B1F; --ink:#E2EBED; --muted:#93A5AA; --line:#25363B; --accent:#55B9C3;
+  --cF:#73A6E8; --cN:#73C48A; --cM:#E58B63; --cC:#B592DA; --cB:#D9B44A; --cG:#E2EBED;
+  --ok:#74CB97; --okbg:#173326; --late:#E3B04F; --latebg:#3A2D12; --after:#F08A77; --afterbg:#3D1D17; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1619; --surface:#142126; --sunk:#0F1B1F; --ink:#E2EBED; --muted:#93A5AA; --line:#25363B; --accent:#55B9C3;
+  --cF:#73A6E8; --cN:#73C48A; --cM:#E58B63; --cC:#B592DA; --cB:#D9B44A; --cG:#E2EBED;
+  --ok:#74CB97; --okbg:#173326; --late:#E3B04F; --latebg:#3A2D12; --after:#F08A77; --afterbg:#3D1D17; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
+header .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--display);font-stretch:82%;font-weight:800;font-size:clamp(28px,4.4vw,44px);line-height:1.02;margin:6px 0 10px;text-wrap:balance;letter-spacing:-.01em}
+h2{font-family:var(--display);font-stretch:88%;font-weight:700;font-size:21px;margin:0 0 6px;text-wrap:balance}
+h3{font-family:var(--display);font-stretch:90%;font-weight:700;font-size:16px;margin:0 0 6px}
+.lede{max-width:72ch;color:var(--muted);margin:0}
+.strip{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:grid;gap:10px}
+.strip-head{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between}
+.strip-head span{font-size:13px;color:var(--muted)}
+.starts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.starts label{display:grid;gap:3px;font-size:12px;color:var(--muted)}
+.starts label b{font-weight:700;color:var(--ink);display:flex;align-items:center;gap:6px;font-size:13px}
+select,input[type=search]{font:inherit;font-size:13.5px;color:var(--ink);background:var(--sunk);border:1px solid var(--line);border-radius:4px;padding:6px 8px;min-width:0;width:100%}
+select:focus-visible,input:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+.reset{font:inherit;font-size:12.5px;background:none;border:0;color:var(--accent);cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:2px}
+.tally{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.pill{font-family:var(--mono);font-size:12px;padding:4px 9px;border-radius:999px;white-space:nowrap;border:1px solid transparent}
+.s-ok{background:var(--okbg);color:var(--ok)} .s-late{background:var(--latebg);color:var(--late)} .s-after{background:var(--afterbg);color:var(--after)}
+.s-neutral{background:var(--sunk);color:var(--muted);border-color:var(--line)}
+nav.tabs{display:flex;gap:2px;margin-top:26px;border-bottom:1px solid var(--line);overflow-x:auto}
+nav.tabs button{font:inherit;font-family:var(--display);font-stretch:90%;font-weight:600;font-size:15px;background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);padding:10px 14px 9px;cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+section.view{padding-top:20px}
+.note{font-size:13px;color:var(--muted);max-width:80ch}
+.well{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--surface);margin-top:12px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;vertical-align:top;padding:9px 10px;border-bottom:1px solid var(--line)}
+thead th{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--sunk);position:sticky;top:0}
+tbody tr:last-child td{border-bottom:0}
+.matrix th.rowh{font-family:var(--body);font-size:13.5px;font-weight:700;text-transform:none;letter-spacing:0;color:var(--ink);background:var(--surface);min-width:160px}
+.matrix td{min-width:150px}
+.matrix td.cell{cursor:pointer}
+.matrix td.cell:hover{background:var(--sunk)}
+.matrix td.empty{color:var(--line)}
+.role{display:flex;gap:6px;align-items:flex-start;font-size:12.5px;line-height:1.35;margin-bottom:5px}
+.role:last-child{margin-bottom:0}
+.tag{font-family:var(--mono);font-size:10.5px;font-weight:600;padding:1px 5px;border-radius:3px;flex:none;border:1px solid currentColor}
+.t-in{color:var(--accent)} .t-spec{color:var(--cC)} .t-out{color:var(--muted)}
+.mono{font-family:var(--mono);font-size:12px;font-variant-numeric:tabular-nums}
+.chead{display:flex;align-items:center;gap:6px}
+.gisrole{font-size:12.5px;color:var(--muted);min-width:220px}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:6px}
+.filters label{display:grid;gap:3px;font-size:12px;color:var(--muted)}
+.reg td.el{min-width:260px;max-width:380px}
+.reg td.el small{display:block;color:var(--muted);margin-top:3px;font-size:12.5px}
+.reg td.cons{white-space:nowrap}
+.dirlab{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.count{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:10px}
+/* timeline */
+.tl{position:relative;min-width:980px;padding:10px 12px 14px}
+.tl-row{position:relative;z-index:1;display:grid;grid-template-columns:150px 1fr;align-items:center;min-height:46px;border-bottom:1px dashed var(--line)}
+.tl-row:last-child{border-bottom:0}
+.tl-lab{font-size:13px;font-weight:700;display:flex;gap:6px;align-items:center}
+.tl-lab small{display:block;font-weight:400;color:var(--muted);font-size:11.5px}
+.tl-track{position:relative;height:46px}
+.tl-axis{display:grid;grid-template-columns:150px 1fr;margin-bottom:4px}
+.tl-months{position:relative;height:30px}
+.tl-months span{position:absolute;top:0;font-family:var(--mono);font-size:10.5px;color:var(--muted);transform:translateX(-50%);white-space:nowrap}
+.tl-months span.yr{color:var(--ink);font-weight:600}
+.mk{position:absolute;top:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-size:11px;font-weight:600;padding:3px 6px;border-radius:4px;cursor:default;white-space:nowrap;border:1px solid transparent}
+.mk.gis{background:var(--ink);color:var(--bg)}
+.mk.empty{background:var(--sunk);color:var(--muted);border-color:var(--line)}
+.vline{z-index:0;position:absolute;top:34px;bottom:10px;width:0;border-left:1px dashed var(--muted);opacity:.45;pointer-events:none}
+.endzone{z-index:0;position:absolute;top:34px;bottom:10px;right:12px;background:repeating-linear-gradient(135deg,transparent 0 6px,var(--sunk) 6px 12px);pointer-events:none}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:10px;font-size:12.5px;color:var(--muted);align-items:center}
+.tip{position:fixed;z-index:20;max-width:340px;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:6px;box-shadow:0 6px 24px rgb(0 0 0 / .18);padding:10px 12px;font-size:12.5px;pointer-events:none}
+.tip ul{margin:6px 0 0;padding-left:16px}
+/* implications */
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-top:8px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px 18px;min-width:0}
+.card ol,.card ul{padding-left:18px;margin:8px 0 0}
+.card li{margin-bottom:8px}
+.card li b{font-weight:700}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.flag{border-left:3px solid var(--after);padding-left:12px}
+.flag.amber{border-left-color:var(--late)}
+footer{margin-top:40px;font-size:12px;color:var(--muted);max-width:90ch}
+@media (max-width:640px){.tl-row,.tl-axis{grid-template-columns:110px 1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>
+[hidden]:not([hidden=until-found i]){display:none!important}
+.authbar{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 14px;font-size:13px}
+.authstatus{color:var(--muted);flex:1 1 260px}
+.signin{display:flex;gap:6px;flex-wrap:wrap;flex:1 1 320px}
+.signin input{font:inherit;font-size:13.5px;color:var(--ink);background:var(--sunk);border:1px solid var(--line);border-radius:4px;padding:6px 8px;flex:1 1 180px;min-width:0}
+.signin button{font:inherit;font-size:13px;font-weight:700;background:var(--accent);color:var(--bg);border:0;border-radius:4px;padding:7px 12px;cursor:pointer}
+.signin button:disabled{opacity:.6}
+.linkbtn{font:inherit;font-size:13px;background:none;border:0;color:var(--accent);cursor:pointer;text-decoration:underline;text-underline-offset:2px;padding:0}
+.authmsg{font-size:12.5px;color:var(--accent);flex-basis:100%}
+.authmsg:empty{display:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow" id="eyebrow"></div>
+  <h1 id="title">Consultant spatial profile</h1>
+  <p class="lede" id="lede"></p>
+</header>
+<div class="authbar" id="authbar" hidden>
+  <span class="pill s-neutral" id="modeLabel">Sample data</span>
+  <span id="authStatus" class="authstatus"></span>
+  <form id="signinForm" class="signin">
+    <label class="sr" for="email">Email</label>
+    <input type="email" id="email" placeholder="you@example.org" autocomplete="email" required>
+    <button type="submit" id="signinBtn">Email me a sign-in link</button>
+  </form>
+  <button type="button" id="signoutBtn" class="linkbtn" hidden>Sign out</button>
+  <span id="authMsg" class="authmsg" role="status"></span>
+</div>
+
+
+<div class="strip" aria-label="Contract start dates">
+  <div class="strip-head">
+    <h3 style="margin:0">Contract start months</h3>
+    <span>Defaults are the start dates written in each TOR. Set the actual signing months to recalculate every status. <button class="reset" id="resetStarts" type="button">Reset to TOR dates</button></span>
+  </div>
+  <div class="starts" id="starts"></div>
+</div>
+
+<div class="tally" id="tally"></div>
+
+<nav class="tabs" role="tablist" id="tabs">
+  <button role="tab" data-v="matrix">Matrix</button>
+  <button role="tab" data-v="register">Register</button>
+  <button role="tab" data-v="timeline">Timeline</button>
+  <button role="tab" data-v="plan">D2 &amp; D3 implications</button>
+</nav>
+
+<section class="view" id="v-matrix" hidden>
+  <h2>Who touches which spatial theme</h2>
+  <p class="note"><span class="tag t-in">IN</span> the consultant produces data that comes to you · <span class="tag t-spec">SPEC</span> the consultant sets a specification your system must follow · <span class="tag t-out">OUT</span> the consultant depends on something you produce. The month is the consultant's own TOR due month. Click a cell to see the items in the register.</p>
+  <div class="well"><table class="matrix" id="matrix"></table></div>
+</section>
+
+<section class="view" id="v-register" hidden>
+  <h2>Spatial element register</h2>
+  <p class="note">"Arrives" is the calendar month from the consultant's start date and TOR due month. "Needed by" is the due month of the first GIS deliverable it feeds. For items you supply (OUT), the check runs the other way.</p>
+  <div class="filters">
+    <label for="fC">Consultant<select id="fC"></select></label>
+    <label for="fT">Theme<select id="fT"></select></label>
+    <label for="fD">Feeds GIS deliverable<select id="fD"></select></label>
+    <label for="fR">Direction<select id="fR"></select></label>
+    <label for="fS">Status<select id="fS"></select></label>
+    <label for="fQ">Search<input type="search" id="fQ" placeholder="Search elements and notes"></label>
+  </div>
+  <div class="well"><table class="reg" id="reg"></table></div>
+  <div class="count" id="regcount"></div>
+</section>
+
+<section class="view" id="v-timeline" hidden>
+  <h2>When the spatial deliverables land</h2>
+  <p class="note">Each marker is one consultant deliverable that contains spatial elements, coloured by its worst status against the GIS deliverable it feeds. Dashed lines mark your deliverables; the hatched band is after your contract ends. Hover or tap a marker for its contents.</p>
+  <div class="well"><div class="tl" id="tl"></div></div>
+  <div class="legend">
+    <span class="pill s-ok">In time</span><span class="pill s-late">Late for the GIS deliverable</span><span class="pill s-after">After the GIS contract</span><span class="pill s-neutral">GIS supplies to the consultant</span>
+  </div>
+</section>
+
+<section class="view" id="v-plan" hidden>
+  <h2>What this means for D2 and D3</h2>
+  <p class="note">The status figures below assume the TOR start dates. They follow from the TOR text and should be confirmed against actual mobilisation.</p>
+  <div class="cols" id="plan"></div>
+</section>
+
+<footer id="foot"></footer>
+</div>
+<div class="tip" id="tip" hidden></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script>
+/* ---------- data state (filled from sample.json or Supabase) ---------- */
+let DATA = [], CONS = {}, G = {n:"GIS (you)",start:6,months:9,col:"--cG"}, MYDUE = {}, THEMES = [], GISROLE = {}, DEF = {}, META = {base_year:2026}, PLAN = [];
+let MODE = "sample";
+let starts = {};
+const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const mlab = i => { const m=Math.floor(i); const y=META.base_year+Math.floor(m/12); return (i%1? "mid ":"")+MON[((m%12)+12)%12]+" "+y; };
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function evalItem(d){
+  const cs = starts[d.c], me = starts.G, end = me+G.months;
+  if(!d.feeds.length) return {first:"—",arrive:cs+d.due,need:cs+d.due,st:"ok",label:"No GIS link"};
+  const first = d.feeds.reduce((a,b)=>MYDUE[a]<=MYDUE[b]?a:b);
+  if(d.dir==="out"){
+    const produced = me+MYDUE[first], need = cs+d.due;
+    const ok = produced<=need;
+    return {first, arrive:produced, need, st: ok?"ok":"late", label: ok?"GIS in time":"GIS late"};
+  }
+  const arrive = cs+d.due, need = me+MYDUE[first];
+  if(arrive<=need) return {first,arrive,need,st:"ok",label:"In time"};
+  if(arrive<=end) return {first,arrive,need,st:"late",label:"Late for "+first};
+  return {first,arrive,need,st:"after",label:"After GIS contract"};
+}
+
+/* starts strip */
+function buildStarts(){
+  const opts = [];
+  for(let i=0;i<=23;i++) opts.push(`<option value="${i}">${MON[i%12]} ${META.base_year+Math.floor(i/12)}</option>`);
+  const keys = ["G",...Object.keys(CONS)];
+  document.getElementById("starts").innerHTML = keys.map(k=>{
+    const o = k==="G"?G:CONS[k];
+    return `<label for="st-${k}"><b><span class="dot" style="background:var(${o.col})"></span>${esc(o.n)}</b><select id="st-${k}" data-k="${k}">${opts.join("")}</select></label>`;
+  }).join("");
+  keys.forEach(k=>{ const s=document.getElementById("st-"+k); s.value=starts[k]; s.onchange=()=>{starts[k]=+s.value; save(); renderAll();}; });
+}
+function save(){ try{localStorage.setItem("bgi-starts-"+MODE,JSON.stringify(starts));}catch(e){} }
+document.getElementById("resetStarts").onclick=()=>{ starts={...DEF}; save(); buildStarts(); renderAll(); };
+
+function renderTally(){
+  const ins = DATA.filter(d=>d.dir!=="out").map(evalItem);
+  const outs = DATA.filter(d=>d.dir==="out").map(evalItem);
+  const n = s=>ins.filter(e=>e.st===s).length;
+  const ol = outs.filter(e=>e.st==="late").length;
+  document.getElementById("tally").innerHTML =
+    `<span class="pill s-neutral">${DATA.length} spatial elements · ${Object.keys(CONS).length} consultants</span>`+
+    `<span class="pill s-ok">${n("ok")} inputs in time</span>`+
+    `<span class="pill s-late">${n("late")} late for the GIS deliverable</span>`+
+    `<span class="pill s-after">${n("after")} after the GIS contract</span>`+
+    `<span class="pill ${ol?"s-late":"s-neutral"}">${outs.length} GIS supplies · ${ol} late</span>`;
+}
+
+/* matrix */
+function renderMatrix(){
+  const keys = Object.keys(CONS);
+  let h = `<thead><tr><th>Spatial theme</th>${keys.map(k=>`<th><span class="chead"><span class="dot" style="background:var(${CONS[k].col})"></span>${esc(CONS[k].n)}</span></th>`).join("")}<th>Your role</th></tr></thead><tbody>`;
+  THEMES.forEach(t=>{
+    h += `<tr><th class="rowh" scope="row">${esc(t)}</th>`;
+    keys.forEach(k=>{
+      const items = DATA.filter(d=>d.theme===t && d.c===k);
+      if(!items.length){ h+=`<td class="empty">·</td>`; return; }
+      const byDir = {in:[],spec:[],out:[]};
+      items.forEach(d=>byDir[d.dir].push(d));
+      let cell="";
+      ["in","spec","out"].forEach(dir=>{
+        if(!byDir[dir].length) return;
+        const mos=[...new Set(byDir[dir].map(d=>d.due))].sort((a,b)=>a-b).map(m=>m===0.5?"wk2":"M"+m);
+        const worst = byDir[dir].map(evalItem).map(e=>e.st);
+        const w = worst.includes("after")?"after":worst.includes("late")?"late":"ok";
+        const short = byDir[dir].length+" item"+(byDir[dir].length>1?"s":"")+" · "+mos.join(", ");
+        cell += `<div class="role"><span class="tag t-${dir}">${dir.toUpperCase()}</span><span>${short} <span class="dot" title="${w}" style="background:var(--${w==="ok"?"ok":w})"></span></span></div>`;
+      });
+      h += `<td class="cell" data-t="${esc(t)}" data-c="${k}" tabindex="0">${cell}</td>`;
+    });
+    h += `<td class="gisrole">${esc(GISROLE[t]||"")}</td></tr>`;
+  });
+  h += "</tbody>";
+  const m = document.getElementById("matrix"); m.innerHTML = h;
+  m.querySelectorAll("td.cell").forEach(td=>{
+    const go=()=>{ setFilters({c:td.dataset.c,t:td.dataset.t}); show("register"); };
+    td.onclick=go; td.onkeydown=e=>{ if(e.key==="Enter") go(); };
+  });
+}
+
+/* register */
+const F = {c:"",t:"",d:"",r:"",s:"",q:""};
+function fillSelect(id,opts,key){
+  const s=document.getElementById(id);
+  s.innerHTML = opts.map(([v,l])=>`<option value="${esc(v)}">${esc(l)}</option>`).join("");
+  s.value = F[key]; s.onchange=()=>{F[key]=s.value; renderRegister();};
+}
+function initFilters(){
+  fillSelect("fC",[["","All consultants"],...Object.keys(CONS).map(k=>[k,CONS[k].n])],"c");
+  fillSelect("fT",[["","All themes"],...THEMES.map(t=>[t,t])],"t");
+  fillSelect("fD",[["","Any"],...Object.keys(MYDUE).map(k=>[k,k])],"d");
+  fillSelect("fR",[["","All"],["in","IN · data to GIS"],["spec","SPEC · sets a spec"],["out","OUT · GIS supplies"]],"r");
+  fillSelect("fS",[["","All"],["ok","In time"],["late","Late"],["after","After GIS contract"]],"s");
+  const q=document.getElementById("fQ"); q.value=F.q; q.oninput=()=>{F.q=q.value.toLowerCase(); renderRegister();};
+}
+function setFilters(o){ Object.assign(F,{c:"",t:"",d:"",r:"",s:"",q:""},o); initFilters(); renderRegister(); }
+function renderRegister(){
+  const rows = DATA.map(d=>({d,e:evalItem(d)})).filter(({d,e})=>
+    (!F.c||d.c===F.c)&&(!F.t||d.theme===F.t)&&(!F.d||d.feeds.includes(F.d))&&(!F.r||d.dir===F.r)&&(!F.s||e.st===F.s)&&
+    (!F.q||(d.el+" "+d.note+" "+d.form+" "+d.theme).toLowerCase().includes(F.q)))
+    .sort((a,b)=>a.e.arrive-b.e.arrive);
+  let h = `<thead><tr><th>Consultant</th><th>Their deliverable</th><th>Spatial element</th><th>Data form</th><th>Sensitivity</th><th>Feeds GIS</th><th>Arrives</th><th>Needed by</th><th>Status</th></tr></thead><tbody>`;
+  rows.forEach(({d,e})=>{
+    const isOut = d.dir==="out";
+    h += `<tr>
+      <td class="cons"><span class="chead"><span class="dot" style="background:var(${CONS[d.c].col})"></span>${esc(CONS[d.c].n)}</span><div class="dirlab">${d.dir==="in"?"IN":d.dir==="spec"?"SPEC":"OUT"}</div></td>
+      <td class="mono">${d.del}<br>${d.due===0.5?"wk 2":"month "+d.due}</td>
+      <td class="el">${esc(d.el)}${d.note?`<small>${esc(d.note)}</small>`:""}</td>
+      <td>${esc(d.form)}<div class="dirlab" style="margin-top:4px">${esc(d.geo)}</div></td>
+      <td>${esc(d.tier)}</td>
+      <td class="mono">${d.feeds.join(", ")}</td>
+      <td class="mono">${isOut?"GIS "+e.first+"<br>":""}${mlab(e.arrive)}</td>
+      <td class="mono">${isOut?esc(CONS[d.c].n)+" "+d.del+"<br>":""}${mlab(e.need)}</td>
+      <td><span class="pill s-${e.st==="ok"?"ok":e.st}">${esc(e.label)}</span></td></tr>`;
+  });
+  h += "</tbody>";
+  document.getElementById("reg").innerHTML = h;
+  document.getElementById("regcount").textContent = rows.length+" of "+DATA.length+" elements shown";
+}
+
+/* timeline */
+function renderTimeline(){
+  const all = [...Object.keys(CONS).map(k=>starts[k]),starts.G];
+  const t0 = Math.min(...all), t1 = t0+24;
+  const pct = i => ((i-t0)/(t1-t0))*100;
+  const tl = document.getElementById("tl");
+  let months = "";
+  for(let i=t0;i<=t1;i++){ const jan = ((i%12)+12)%12===0; months += `<span class="${jan?"yr":""}" style="left:${pct(i)}%">${jan?MON[0]+" "+(META.base_year+Math.floor(i/12)):MON[((i%12)+12)%12]}</span>`; }
+  let h = `<div class="tl-axis"><div></div><div class="tl-months">${months}</div></div>`;
+  // GIS lane
+  const me = starts.G;
+  h += `<div class="tl-row"><div class="tl-lab"><span class="dot" style="background:var(--cG)"></span><span>GIS (you)<small>${G.months} months</small></span></div><div class="tl-track">`+
+    Object.keys(MYDUE).map(k=>`<span class="mk gis" style="left:${pct(me+MYDUE[k])}%">${k}</span>`).join("")+`</div></div>`;
+  Object.keys(CONS).forEach(k=>{
+    const groups = {};
+    DATA.filter(d=>d.c===k).forEach(d=>{ (groups[d.del]=groups[d.del]||[]).push(d); });
+    let marks = "", beyond = [];
+    Object.entries(groups).forEach(([del,items])=>{
+      const t = starts[k]+items[0].due;
+      const ins = items.filter(d=>d.dir!=="out").map(evalItem).map(e=>e.st);
+      const cls = ins.length? (ins.includes("after")?"s-after":ins.includes("late")?"s-late":"s-ok") : "empty";
+      const payload = encodeURIComponent(JSON.stringify({h:CONS[k].n+" "+del+" · "+mlab(t),items:items.map(d=>(d.dir==="out"?"[GIS supplies] ":"")+d.el)}));
+      if(t>t1){ beyond.push(`${del} ${mlab(t)}`); return; }
+      marks += `<span class="mk ${cls==="empty"?"empty":cls}" style="left:${pct(t)}%" data-tip="${payload}" tabindex="0">${del}</span>`;
+    });
+    if(beyond.length) marks += `<span class="mk s-after" style="left:97%;" data-tip="${encodeURIComponent(JSON.stringify({h:"Beyond this window",items:beyond}))}" tabindex="0">+${beyond.length} →</span>`;
+    h += `<div class="tl-row"><div class="tl-lab"><span class="dot" style="background:var(${CONS[k].col})"></span><span>${esc(CONS[k].n)}<small>${CONS[k].months} months from ${mlab(starts[k])}</small></span></div><div class="tl-track">${marks}</div></div>`;
+  });
+  // vlines + end zone, positioned in the track coordinate space
+  tl.innerHTML = h;
+  const track = tl.querySelector(".tl-track");
+  const offL = track.getBoundingClientRect().left - tl.getBoundingClientRect().left, w = track.offsetWidth;
+  Object.keys(MYDUE).forEach(k=>{ const v=document.createElement("div"); v.className="vline"; v.style.left=(offL+w*pct(me+MYDUE[k])/100)+"px"; tl.appendChild(v); });
+  const ez = document.createElement("div"); ez.className="endzone"; const left=offL+w*pct(me+G.months)/100; ez.style.left=left+"px"; tl.appendChild(ez);
+  tl.querySelectorAll("[data-tip]").forEach(el=>{
+    const showTip=(x,y)=>{ const p=JSON.parse(decodeURIComponent(el.dataset.tip)); const tip=document.getElementById("tip");
+      tip.innerHTML=`<b>${esc(p.h)}</b><ul>${p.items.map(i=>`<li>${esc(i)}</li>`).join("")}</ul>`; tip.hidden=false;
+      const r=tip.getBoundingClientRect(); tip.style.left=Math.max(8,Math.min(x+12,innerWidth-r.width-8))+"px"; tip.style.top=Math.max(8,Math.min(y+12,innerHeight-r.height-8))+"px"; };
+    el.onmouseenter=e=>showTip(e.clientX,e.clientY); el.onmousemove=e=>showTip(e.clientX,e.clientY);
+    el.onmouseleave=()=>document.getElementById("tip").hidden=true;
+    el.onfocus=()=>{const r=el.getBoundingClientRect(); showTip(r.left,r.bottom);}; el.onblur=()=>document.getElementById("tip").hidden=true;
+    el.onclick=e=>showTip(e.clientX,e.clientY);
+  });
+}
+
+
+/* tabs */
+function show(v){
+  document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.v===v));
+  document.querySelectorAll("section.view").forEach(s=>s.hidden = s.id!=="v-"+v);
+  try{localStorage.setItem("bgi-tab",v);}catch(e){}
+  if(v==="timeline") renderTimeline();
+}
+document.querySelectorAll("nav.tabs button").forEach(b=>b.onclick=()=>show(b.dataset.v));
+function renderAll(){ renderTally(); renderMatrix(); renderRegister(); renderPlan(); if(!document.getElementById("v-timeline").hidden) renderTimeline(); }
+addEventListener("resize",()=>{ if(!document.getElementById("v-timeline").hidden) renderTimeline(); });
+
+/* implications (cards come from the data) */
+function renderPlan(){
+  const cnt = (del)=>{ const r=DATA.filter(d=>d.dir!=="out"&&evalItem(d).first===del).map(evalItem); return {n:r.length,ok:r.filter(e=>e.st==="ok").length,late:r.filter(e=>e.st==="late").length,after:r.filter(e=>e.st==="after").length}; };
+  document.getElementById("plan").innerHTML = PLAN.map(card=>{
+    let stat = "";
+    if(card.stat){ const s=cnt(card.stat); stat = `<p class="note" style="margin:4px 0 0">Inputs whose first use is ${esc(card.stat)}: <b>${s.n}</b> · in time <b>${s.ok}</b> · late <b>${s.late}</b> · after contract <b>${s.after}</b></p>`; }
+    const tag = card.list==="ul"?"ul":"ol";
+    const items = (card.items||[]).map(it=>`<li${it.flag?` class="flag${it.flag==="amber"?" amber":""}"`:""}>${it.b?`<b>${esc(it.b)}</b> `:""}${esc(it.t)}</li>`).join("");
+    return `<div class="card"><div class="kicker">${esc(card.kicker)}</div><h3>${esc(card.title)}</h3>${stat}<${tag}>${items}</${tag}></div>`;
+  }).join("");
+}
+
+/* ---------- loading ---------- */
+function applyBundle(b, mode){
+  MODE = mode;
+  META = {base_year:2026, ...b.meta};
+  CONS = b.consultants; G = {...G, ...b.gis}; MYDUE = b.gis_due; THEMES = b.themes; GISROLE = b.gis_roles || {};
+  DEF = b.default_starts; PLAN = b.plan || []; DATA = b.elements;
+  starts = {...DEF};
+  try{ const s=JSON.parse(localStorage.getItem("bgi-starts-"+MODE)||"null"); if(s) Object.keys(DEF).forEach(k=>{ if(Number.isFinite(s[k])) starts[k]=s[k]; }); }catch(e){}
+  document.getElementById("eyebrow").textContent = META.eyebrow||"";
+  document.getElementById("title").textContent = META.title||"Consultant spatial profile";
+  document.getElementById("lede").textContent = META.lede||"";
+  document.getElementById("foot").textContent = META.footer||"";
+  document.title = META.title||"Consultant spatial profile";
+  Object.assign(F,{c:"",t:"",d:"",r:"",s:"",q:""});
+  buildStarts(); initFilters(); renderAll();
+  let tab="matrix"; try{tab=localStorage.getItem("bgi-tab")||"matrix";}catch(e){}
+  show(["matrix","register","timeline","plan"].includes(tab)?tab:"matrix");
+}
+
+async function loadSample(){
+  const r = await fetch("data/sample.json", {cache:"no-cache"});
+  applyBundle(await r.json(), "sample");
+}
+
+async function loadFromSupabase(){
+  const pick = async (t, order) => { const {data, error} = await sb.from(t).select("*").order(order); if(error) throw error; return data; };
+  const [cons, dues, themes, els, settings] = await Promise.all([
+    pick("consultants","sort"), pick("gis_deliverables","due_month"), pick("themes","sort"),
+    pick("spatial_elements","id"), pick("dashboard_settings","key")]);
+  if(!cons.length || !els.length) return false;   // signed in but not allow-listed (RLS returns nothing)
+  const set = Object.fromEntries(settings.map(s=>[s.key, s.value]));
+  const consultants = Object.fromEntries(cons.map(c=>[c.code,{n:c.short_name,full:c.full_name,start:c.start_month,months:c.months,col:c.color_var}]));
+  const gis = {n:"GIS (you)",start:6,months:9,col:"--cG",...(set.gis||{})};
+  applyBundle({
+    meta: set.meta||{}, consultants, gis,
+    gis_due: Object.fromEntries(dues.map(d=>[d.code, Number(d.due_month)])),
+    themes: themes.map(t=>t.name), gis_roles: Object.fromEntries(themes.map(t=>[t.name, t.gis_role||""])),
+    default_starts: {...Object.fromEntries(cons.map(c=>[c.code,c.start_month])), G: gis.start},
+    plan: set.plan||[],
+    elements: els.map(e=>({c:e.consultant_code, del:e.deliverable, due:Number(e.due_month), el:e.element, form:e.data_form||"",
+      theme:e.theme||"", dir:e.direction, feeds:e.feeds||[], tier:e.sensitivity||"—", geo:e.geography||"", note:e.note||""}))
+  }, "live");
+  return true;
+}
+
+/* ---------- sign-in ---------- */
+const CFG = window.DASHBOARD_CONFIG || {};
+const sbReady = CFG.supabaseUrl && CFG.supabaseAnonKey && window.supabase;
+const sb = sbReady ? window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseAnonKey, {auth:{persistSession:true, detectSessionInUrl:true}}) : null;
+const $ = id => document.getElementById(id);
+
+function setAuthUI(state, email, msg){
+  $("modeLabel").textContent = state==="live" ? "Project data" : "Sample data";
+  $("modeLabel").className = "pill " + (state==="live" ? "s-ok" : "s-neutral");
+  $("authStatus").textContent = state==="live" ? `Signed in as ${email}` : state==="denied" ? `Signed in as ${email}, but this account doesn't have access to the project data.` : "You're viewing placeholder data. Authorised users can sign in to see the project dataset.";
+  $("signinForm").hidden = state!=="out";
+  $("signoutBtn").hidden = state==="out";
+  $("authMsg").textContent = msg||"";
+  $("authbar").hidden = !sb;
+}
+
+async function refresh(session){
+  if(!session){ setAuthUI("out"); if(MODE!=="sample") await loadSample(); return; }
+  const email = session.user.email;
+  try{
+    const ok = await loadFromSupabase();
+    if(ok) setAuthUI("live", email);
+    else { setAuthUI("denied", email); if(MODE!=="sample") await loadSample(); }
+  }catch(e){ setAuthUI("denied", email, "Couldn't load the project data: "+e.message); }
+}
+
+if(sb){
+  $("signinForm").onsubmit = async ev => {
+    ev.preventDefault();
+    const email = $("email").value.trim(); if(!email) return;
+    $("signinBtn").disabled = true;
+    const {error} = await sb.auth.signInWithOtp({email, options:{shouldCreateUser:false, emailRedirectTo: location.origin + location.pathname}});
+    $("signinBtn").disabled = false;
+    $("authMsg").textContent = error ? "Couldn't send the link: "+error.message : "Check your inbox for a sign-in link.";
+  };
+  $("signoutBtn").onclick = async () => { await sb.auth.signOut(); };
+  let last = null;
+  sb.auth.onAuthStateChange((_event, session) => {
+    const key = session ? session.user.id : null;
+    if(key === last) return; last = key;
+    setTimeout(()=>refresh(session), 0);
+  });
+}
+
+(async () => {
+  await loadSample();
+  setAuthUI("out");
+  if(sb){ const {data} = await sb.auth.getSession(); if(data.session) refresh(data.session); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,750 @@
+{
+ "meta": {
+  "eyebrow": "Sample project \u00b7 Spatial data workstream",
+  "title": "Consultant spatial profile",
+  "lede": "Which spatial outputs each consultant produces, the specifications they set and the GIS products they depend on, checked against the GIS deliverable due dates. You are viewing placeholder data.",
+  "footer": "Placeholder data for demonstration. Sign in to view the project dataset.",
+  "base_year": 2026,
+  "gis_months": 9
+ },
+ "consultants": {
+  "F": {
+   "n": "Consultant A",
+   "full": "Sample Consultant A",
+   "start": 6,
+   "months": 36,
+   "col": "--cF"
+  },
+  "N": {
+   "n": "Consultant B",
+   "full": "Sample Consultant B",
+   "start": 5,
+   "months": 24,
+   "col": "--cN"
+  },
+  "M": {
+   "n": "Consultant C",
+   "full": "Sample Consultant C",
+   "start": 6,
+   "months": 9,
+   "col": "--cM"
+  },
+  "C": {
+   "n": "Consultant D",
+   "full": "Sample Consultant D",
+   "start": 5,
+   "months": 40,
+   "col": "--cC"
+  },
+  "B": {
+   "n": "Consultant E",
+   "full": "Sample Consultant E",
+   "start": 5,
+   "months": 36,
+   "col": "--cB"
+  }
+ },
+ "gis": {
+  "n": "GIS (you)",
+  "start": 6,
+  "months": 9,
+  "col": "--cG"
+ },
+ "gis_due": {
+  "D1": 0.5,
+  "D2": 2,
+  "D3": 4,
+  "D4": 5,
+  "D5": 7,
+  "D6": 9
+ },
+ "themes": [
+  "Theme 01",
+  "Theme 02",
+  "Theme 03",
+  "Theme 04",
+  "Theme 05",
+  "Theme 06",
+  "Theme 07",
+  "Theme 08",
+  "Theme 09",
+  "Theme 10"
+ ],
+ "gis_roles": {
+  "Theme 01": "Placeholder note on how the GIS deliverables use theme 01.",
+  "Theme 02": "Placeholder note on how the GIS deliverables use theme 02.",
+  "Theme 03": "Placeholder note on how the GIS deliverables use theme 03.",
+  "Theme 04": "Placeholder note on how the GIS deliverables use theme 04.",
+  "Theme 05": "Placeholder note on how the GIS deliverables use theme 05.",
+  "Theme 06": "Placeholder note on how the GIS deliverables use theme 06.",
+  "Theme 07": "Placeholder note on how the GIS deliverables use theme 07.",
+  "Theme 08": "Placeholder note on how the GIS deliverables use theme 08.",
+  "Theme 09": "Placeholder note on how the GIS deliverables use theme 09.",
+  "Theme 10": "Placeholder note on how the GIS deliverables use theme 10."
+ },
+ "default_starts": {
+  "F": 6,
+  "N": 5,
+  "M": 6,
+  "C": 5,
+  "B": 5,
+  "G": 6
+ },
+ "plan": [
+  {
+   "kicker": "D2 \u00b7 Sample deliverable",
+   "title": "Sample heading for the first deliverable",
+   "stat": "D2",
+   "list": "ol",
+   "items": [
+    {
+     "b": "Point 1.",
+     "t": "Placeholder text. The real analysis is stored in the secured database and appears after sign-in.",
+     "flag": ""
+    },
+    {
+     "b": "Point 2.",
+     "t": "Placeholder text. The real analysis is stored in the secured database and appears after sign-in.",
+     "flag": ""
+    },
+    {
+     "b": "Point 3.",
+     "t": "Placeholder text. The real analysis is stored in the secured database and appears after sign-in.",
+     "flag": ""
+    }
+   ]
+  },
+  {
+   "kicker": "D3 \u00b7 Sample deliverable",
+   "title": "Sample heading for the second deliverable",
+   "stat": "D3",
+   "list": "ol",
+   "items": [
+    {
+     "b": "Point 1.",
+     "t": "Placeholder text. The real analysis is stored in the secured database and appears after sign-in.",
+     "flag": ""
+    },
+    {
+     "b": "Point 2.",
+     "t": "Placeholder text. The real analysis is stored in the secured database and appears after sign-in.",
+     "flag": ""
+    },
+    {
+     "b": "Point 3.",
+     "t": "Placeholder text. The real analysis is stored in the secured database and appears after sign-in.",
+     "flag": ""
+    }
+   ]
+  },
+  {
+   "kicker": "Follow-up actions",
+   "title": "Sample action list",
+   "stat": null,
+   "list": "ul",
+   "items": [
+    {
+     "b": "",
+     "t": "Placeholder action item.",
+     "flag": "red"
+    },
+    {
+     "b": "",
+     "t": "Placeholder action item.",
+     "flag": "red"
+    },
+    {
+     "b": "",
+     "t": "Placeholder action item.",
+     "flag": "amber"
+    }
+   ]
+  }
+ ],
+ "elements": [
+  {
+   "c": "F",
+   "del": "D1",
+   "due": 0.5,
+   "el": "Sample spatial element 01",
+   "form": "Points",
+   "theme": "Theme 02",
+   "dir": "out",
+   "feeds": [
+    "D2",
+    "D6"
+   ],
+   "tier": "Public",
+   "geo": "Area 3",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "F",
+   "del": "D2",
+   "due": 5,
+   "el": "Sample spatial element 02",
+   "form": "Points",
+   "theme": "Theme 09",
+   "dir": "out",
+   "feeds": [
+    "D2"
+   ],
+   "tier": "Public",
+   "geo": "Area 2",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "F",
+   "del": "D3",
+   "due": 22,
+   "el": "Sample spatial element 03",
+   "form": "Specification",
+   "theme": "Theme 05",
+   "dir": "in",
+   "feeds": [
+    "D4"
+   ],
+   "tier": "Restricted",
+   "geo": "Area 3",
+   "note": ""
+  },
+  {
+   "c": "F",
+   "del": "D3",
+   "due": 22,
+   "el": "Sample spatial element 04",
+   "form": "Points",
+   "theme": "Theme 06",
+   "dir": "in",
+   "feeds": [
+    "D2",
+    "D3"
+   ],
+   "tier": "Public",
+   "geo": "Area 3",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "N",
+   "del": "D1",
+   "due": 0.5,
+   "el": "Sample spatial element 05",
+   "form": "Polygons",
+   "theme": "Theme 08",
+   "dir": "out",
+   "feeds": [
+    "D3",
+    "D5"
+   ],
+   "tier": "Public",
+   "geo": "Area 3",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "N",
+   "del": "D1",
+   "due": 0.5,
+   "el": "Sample spatial element 06",
+   "form": "Classified raster",
+   "theme": "Theme 10",
+   "dir": "in",
+   "feeds": [
+    "D5"
+   ],
+   "tier": "Restricted",
+   "geo": "Area 1",
+   "note": ""
+  },
+  {
+   "c": "N",
+   "del": "D2",
+   "due": 5,
+   "el": "Sample spatial element 07",
+   "form": "Polygons",
+   "theme": "Theme 04",
+   "dir": "in",
+   "feeds": [
+    "D3"
+   ],
+   "tier": "\u2014",
+   "geo": "Area 1 \u00b7 Area 2",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "N",
+   "del": "D2",
+   "due": 5,
+   "el": "Sample spatial element 08",
+   "form": "Points",
+   "theme": "Theme 06",
+   "dir": "in",
+   "feeds": [
+    "D3",
+    "D6"
+   ],
+   "tier": "Restricted",
+   "geo": "Area 1 \u00b7 Area 2",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "N",
+   "del": "D2",
+   "due": 5,
+   "el": "Sample spatial element 09",
+   "form": "Survey template",
+   "theme": "Theme 03",
+   "dir": "out",
+   "feeds": [
+    "D5"
+   ],
+   "tier": "Restricted",
+   "geo": "Area 2",
+   "note": ""
+  },
+  {
+   "c": "N",
+   "del": "D3",
+   "due": 19,
+   "el": "Sample spatial element 10",
+   "form": "Points",
+   "theme": "Theme 06",
+   "dir": "in",
+   "feeds": [
+    "D5",
+    "D6"
+   ],
+   "tier": "Restricted",
+   "geo": "Area 1",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "N",
+   "del": "D3",
+   "due": 19,
+   "el": "Sample spatial element 11",
+   "form": "Polygons",
+   "theme": "Theme 04",
+   "dir": "out",
+   "feeds": [
+    "D3",
+    "D4"
+   ],
+   "tier": "Community-controlled",
+   "geo": "Area 2",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "M",
+   "del": "D1",
+   "due": 0.5,
+   "el": "Sample spatial element 12",
+   "form": "Points",
+   "theme": "Theme 04",
+   "dir": "out",
+   "feeds": [
+    "D2",
+    "D3"
+   ],
+   "tier": "Community-controlled",
+   "geo": "Area 3",
+   "note": ""
+  },
+  {
+   "c": "M",
+   "del": "D1",
+   "due": 0.5,
+   "el": "Sample spatial element 13",
+   "form": "Points",
+   "theme": "Theme 09",
+   "dir": "spec",
+   "feeds": [
+    "D2",
+    "D3"
+   ],
+   "tier": "Public",
+   "geo": "Area 1",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "M",
+   "del": "D2",
+   "due": 7,
+   "el": "Sample spatial element 14",
+   "form": "Attribute table",
+   "theme": "Theme 10",
+   "dir": "in",
+   "feeds": [
+    "D6"
+   ],
+   "tier": "\u2014",
+   "geo": "Area 3",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "M",
+   "del": "D3",
+   "due": 19,
+   "el": "Sample spatial element 15",
+   "form": "Survey template",
+   "theme": "Theme 02",
+   "dir": "out",
+   "feeds": [
+    "D1",
+    "D5"
+   ],
+   "tier": "Community-controlled",
+   "geo": "Area 1 \u00b7 Area 2",
+   "note": ""
+  },
+  {
+   "c": "M",
+   "del": "D3",
+   "due": 19,
+   "el": "Sample spatial element 16",
+   "form": "Attribute table",
+   "theme": "Theme 03",
+   "dir": "spec",
+   "feeds": [
+    "D3"
+   ],
+   "tier": "Public",
+   "geo": "Area 1 \u00b7 Area 2",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "M",
+   "del": "D3",
+   "due": 19,
+   "el": "Sample spatial element 17",
+   "form": "Polygons",
+   "theme": "Theme 05",
+   "dir": "out",
+   "feeds": [
+    "D5"
+   ],
+   "tier": "Restricted",
+   "geo": "Area 2",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "M",
+   "del": "D4",
+   "due": 17,
+   "el": "Sample spatial element 18",
+   "form": "Classified raster",
+   "theme": "Theme 08",
+   "dir": "in",
+   "feeds": [
+    "D5"
+   ],
+   "tier": "Public",
+   "geo": "Area 1 \u00b7 Area 2",
+   "note": ""
+  },
+  {
+   "c": "M",
+   "del": "D5",
+   "due": 16,
+   "el": "Sample spatial element 19",
+   "form": "Specification",
+   "theme": "Theme 02",
+   "dir": "in",
+   "feeds": [
+    "D2"
+   ],
+   "tier": "\u2014",
+   "geo": "Area 1",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "M",
+   "del": "D6",
+   "due": 25,
+   "el": "Sample spatial element 20",
+   "form": "Attribute table",
+   "theme": "Theme 09",
+   "dir": "in",
+   "feeds": [
+    "D6"
+   ],
+   "tier": "Community-controlled",
+   "geo": "Area 3",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "C",
+   "del": "D1",
+   "due": 0.5,
+   "el": "Sample spatial element 21",
+   "form": "Classified raster",
+   "theme": "Theme 07",
+   "dir": "in",
+   "feeds": [
+    "D6"
+   ],
+   "tier": "\u2014",
+   "geo": "Area 3",
+   "note": ""
+  },
+  {
+   "c": "C",
+   "del": "D1",
+   "due": 0.5,
+   "el": "Sample spatial element 22",
+   "form": "Points",
+   "theme": "Theme 02",
+   "dir": "in",
+   "feeds": [
+    "D2"
+   ],
+   "tier": "Public",
+   "geo": "Area 2",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "C",
+   "del": "D1",
+   "due": 0.5,
+   "el": "Sample spatial element 23",
+   "form": "Polygons",
+   "theme": "Theme 01",
+   "dir": "in",
+   "feeds": [
+    "D1"
+   ],
+   "tier": "Public",
+   "geo": "Area 1",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "C",
+   "del": "D2",
+   "due": 14,
+   "el": "Sample spatial element 24",
+   "form": "Survey template",
+   "theme": "Theme 08",
+   "dir": "in",
+   "feeds": [
+    "D3"
+   ],
+   "tier": "Restricted",
+   "geo": "Area 3",
+   "note": ""
+  },
+  {
+   "c": "C",
+   "del": "D3",
+   "due": 12,
+   "el": "Sample spatial element 25",
+   "form": "Polygons",
+   "theme": "Theme 07",
+   "dir": "in",
+   "feeds": [
+    "D1",
+    "D2"
+   ],
+   "tier": "\u2014",
+   "geo": "Area 3",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "C",
+   "del": "D3",
+   "due": 12,
+   "el": "Sample spatial element 26",
+   "form": "Survey template",
+   "theme": "Theme 02",
+   "dir": "in",
+   "feeds": [
+    "D1",
+    "D6"
+   ],
+   "tier": "\u2014",
+   "geo": "Area 1 \u00b7 Area 2",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "C",
+   "del": "D4",
+   "due": 9,
+   "el": "Sample spatial element 27",
+   "form": "Specification",
+   "theme": "Theme 08",
+   "dir": "in",
+   "feeds": [
+    "D2"
+   ],
+   "tier": "\u2014",
+   "geo": "Area 2",
+   "note": ""
+  },
+  {
+   "c": "B",
+   "del": "D1",
+   "due": 0.5,
+   "el": "Sample spatial element 28",
+   "form": "Attribute table",
+   "theme": "Theme 09",
+   "dir": "in",
+   "feeds": [
+    "D1"
+   ],
+   "tier": "Public",
+   "geo": "Area 1",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "B",
+   "del": "D1",
+   "due": 0.5,
+   "el": "Sample spatial element 29",
+   "form": "Points",
+   "theme": "Theme 07",
+   "dir": "spec",
+   "feeds": [
+    "D2"
+   ],
+   "tier": "\u2014",
+   "geo": "Area 2",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "B",
+   "del": "D2",
+   "due": 16,
+   "el": "Sample spatial element 30",
+   "form": "Polygons",
+   "theme": "Theme 07",
+   "dir": "in",
+   "feeds": [
+    "D4"
+   ],
+   "tier": "\u2014",
+   "geo": "Area 1 \u00b7 Area 2",
+   "note": ""
+  },
+  {
+   "c": "B",
+   "del": "D3",
+   "due": 18,
+   "el": "Sample spatial element 31",
+   "form": "Classified raster",
+   "theme": "Theme 04",
+   "dir": "in",
+   "feeds": [
+    "D2",
+    "D6"
+   ],
+   "tier": "Public",
+   "geo": "Area 1 \u00b7 Area 2",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "B",
+   "del": "D3",
+   "due": 18,
+   "el": "Sample spatial element 32",
+   "form": "Specification",
+   "theme": "Theme 08",
+   "dir": "out",
+   "feeds": [
+    "D1"
+   ],
+   "tier": "Restricted",
+   "geo": "Area 1",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "B",
+   "del": "D3",
+   "due": 18,
+   "el": "Sample spatial element 33",
+   "form": "Polygons",
+   "theme": "Theme 10",
+   "dir": "in",
+   "feeds": [
+    "D2"
+   ],
+   "tier": "Restricted",
+   "geo": "Area 3",
+   "note": ""
+  },
+  {
+   "c": "B",
+   "del": "D4",
+   "due": 9,
+   "el": "Sample spatial element 34",
+   "form": "Specification",
+   "theme": "Theme 01",
+   "dir": "out",
+   "feeds": [
+    "D5"
+   ],
+   "tier": "Public",
+   "geo": "Area 3",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "B",
+   "del": "D4",
+   "due": 9,
+   "el": "Sample spatial element 35",
+   "form": "Survey template",
+   "theme": "Theme 06",
+   "dir": "in",
+   "feeds": [
+    "D2",
+    "D3"
+   ],
+   "tier": "Community-controlled",
+   "geo": "Area 3",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "B",
+   "del": "D4",
+   "due": 9,
+   "el": "Sample spatial element 36",
+   "form": "Survey template",
+   "theme": "Theme 05",
+   "dir": "spec",
+   "feeds": [
+    "D6"
+   ],
+   "tier": "Community-controlled",
+   "geo": "Area 1",
+   "note": ""
+  },
+  {
+   "c": "B",
+   "del": "D5",
+   "due": 7,
+   "el": "Sample spatial element 37",
+   "form": "Specification",
+   "theme": "Theme 04",
+   "dir": "out",
+   "feeds": [
+    "D1"
+   ],
+   "tier": "Community-controlled",
+   "geo": "Area 2",
+   "note": "Placeholder note. Real content loads after sign-in."
+  },
+  {
+   "c": "B",
+   "del": "D5",
+   "due": 7,
+   "el": "Sample spatial element 38",
+   "form": "Classified raster",
+   "theme": "Theme 05",
+   "dir": "in",
+   "feeds": [
+    "D1",
+    "D2"
+   ],
+   "tier": "\u2014",
+   "geo": "Area 1 \u00b7 Area 2",
+   "note": "Placeholder note. Real content loads after sign-in."
+  }
+ ]
+}

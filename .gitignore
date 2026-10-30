@@ -1,0 +1,6 @@
+# Project data must never be committed. Keep real seed files here or outside the repo.
+private/
+*.private.sql
+seed-real*.sql
+.env
+.DS_Store
