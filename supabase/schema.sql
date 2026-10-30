@@ -10,7 +10,11 @@ create table if not exists public.allowed_users (
 );
 
 -- True when the signed-in user's email is on the allow-list.
-create or replace function public.is_allowed()
+-- Kept in a non-exposed schema so it can't be called through the public API.
+create schema if not exists private;
+revoke all on schema private from public, anon;
+grant usage on schema private to authenticated;
+create or replace function private.is_allowed()
 returns boolean
 language sql stable security definer set search_path = public
 as $$
@@ -19,8 +23,8 @@ as $$
     where lower(email) = lower(coalesce(auth.jwt() ->> 'email', ''))
   );
 $$;
-revoke all on function public.is_allowed() from public, anon;
-grant execute on function public.is_allowed() to authenticated;
+revoke all on function private.is_allowed() from public, anon;
+grant execute on function private.is_allowed() to authenticated;
 
 -- 2. Data tables -----------------------------------------------------------
 create table if not exists public.consultants (
@@ -82,11 +86,11 @@ begin
   end loop;
 end $$;
 
-create policy "allow-listed users read" on public.consultants        for select to authenticated using (public.is_allowed());
-create policy "allow-listed users read" on public.gis_deliverables   for select to authenticated using (public.is_allowed());
-create policy "allow-listed users read" on public.themes             for select to authenticated using (public.is_allowed());
-create policy "allow-listed users read" on public.spatial_elements   for select to authenticated using (public.is_allowed());
-create policy "allow-listed users read" on public.dashboard_settings for select to authenticated using (public.is_allowed());
+create policy "allow-listed users read" on public.consultants        for select to authenticated using (private.is_allowed());
+create policy "allow-listed users read" on public.gis_deliverables   for select to authenticated using (private.is_allowed());
+create policy "allow-listed users read" on public.themes             for select to authenticated using (private.is_allowed());
+create policy "allow-listed users read" on public.spatial_elements   for select to authenticated using (private.is_allowed());
+create policy "allow-listed users read" on public.dashboard_settings for select to authenticated using (private.is_allowed());
 -- Users may only see their own allow-list row (used to show "no access" messages).
 create policy "allow-listed users read" on public.allowed_users      for select to authenticated
   using (lower(email) = lower(coalesce(auth.jwt() ->> 'email', '')));

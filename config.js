@@ -8,6 +8,6 @@
 // Leave these empty and the dashboard runs on the sample data only.
 // NEVER put the service_role (secret) key here.
 window.DASHBOARD_CONFIG = {
-  supabaseUrl: "",       // e.g. "https://abcdefghijkl.supabase.co"
-  supabaseAnonKey: ""    // Project Settings → API Keys → anon / publishable key
+  supabaseUrl: "https://pytvtcdfyqskuzmsxsea.supabase.co",
+  supabaseAnonKey: "sb_publishable_0Joh3-BGNVEtFn3p8_dCjA_LoeARJ3Q"   // publishable key, safe to expose
 };
